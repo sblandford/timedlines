@@ -80,12 +80,13 @@ func main() {
 					continue
 				}
 
-				// Fetch the line
-				outText := reLine.ReplaceAllString(foundLine, "$3")
-
+				// Wait until time to print
 				for timePassed > uint64(time.Since(timeStart)) {
 					time.Sleep(sleepTimeMs * time.Millisecond)
 				}
+
+				// Fetch the line
+				outText := reLine.ReplaceAllString(foundLine, "$3")
 
 				fmt.Fprintf(writer, "%s\n", outText)
 			} else {
