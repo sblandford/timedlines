@@ -104,7 +104,7 @@ func main() {
 					continue
 				}
 				// Fetch the timecode
-				timeCodeMs, err := timeToMs(reLine.ReplaceAllString(foundLine, "$2"))
+				timeCodeMs, err := timeToMs(reLine.ReplaceAllString(foundLine, "$1$2"))
 				if err != nil {
 					log.Println(err)
 					continue
@@ -125,7 +125,7 @@ func main() {
 					timeCodeMs = -timeCodeMs
 					fmt.Fprintf(writer, "-")
 				}
-				timeCodeMilliSeconds := timeCodeMs % 100
+				timeCodeMilliSeconds := timeCodeMs % 1000
 				timeCodeSeconds := (timeCodeMs / 1000) % 60
 				timeCodeMinutes := (timeCodeMs / (60 * 1000)) % 60
 				timeCodeHours := timeCodeMs / (60 * 60 * 1000)
